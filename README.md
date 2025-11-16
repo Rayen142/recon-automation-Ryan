@@ -2,6 +2,7 @@
 
 **Nama Repository:** recon-automation-Ryan
 **Nama Script:** `recon-auto.sh`
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-hanif)
 
 ## Deskripsi Proyek
 
@@ -73,6 +74,7 @@ Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan m
 
 **PETUNJUK AKHIR:** Setelah `README.md` ini lengkap dan tersimpan, 
 lakukan `git add .`, `git commit -m "feat: Finalisasi dokumentasi dan hasil"` dan `git push origin main` untuk mengumpulkan tugas Anda.
+
 
 
 
