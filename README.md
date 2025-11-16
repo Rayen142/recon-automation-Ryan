@@ -7,26 +7,25 @@
 
 Proyek ini adalah implementasi dari **Assignment Build Your Own Recon Automation Tool** yang bertujuan untuk mengotomatisasi alur kerja *subdomain enumeration* dan validasi host yang hidup (*live hosts*) menggunakan Bash Scripting.
 
-Script `recon-auto.sh` dirancang untuk berjalan *end-to-end* tanpa *error*, mengintegrasikan minimal 3 *tools* (`subfinder`, `anew`, dan `httpx`)  
-dalam satu *pipeline*, mengelola *input/output* file, melakukan *deduplikasi*, dan mencatat *logging* yang informatif[cite: 15]. Seluruh hasil pengerjaan diunggah ke *repository* GitHub publik ini.
+Script `recon-auto.sh` dirancang untuk berjalan *end-to-end* tanpa *error* kritis, mengintegrasikan minimal 3 *tools* (`subfinder`, `anew`, dan `httpx`) dalam satu *pipeline*, mengelola *input/output* file, melakukan *deduplikasi*, dan mencatat *logging* yang informatif.
 
 ## Struktur Direktori
 
-Struktur folder ini wajib ada untuk memastikan skrip berjalan dengan benar.
-recon-automation-Ryan/ 
-├── input/ │ ├── domains.txt │ └── all-subdomains.txt ├── output/ │ └── live.txt ├── scripts/ │ 
-└── recon-auto.sh └── logs/ ├── progress.log └── errors.log| File/Folder | Deskripsi |
+Struktur folder ini wajib ada untuk memastikan skrip berjalan dengan benar sesuai panduan *assignment*.
+recon-automation-Ryan/ ├── input/ │ ├── domains.txt │ └── all-subdomains.txt ├── output/ 
+│ └── live.txt ├── scripts/ │ └── recon-auto.sh └── logs/ ├── progress.log └── errors.log
+| File/Folder | Deskripsi |
 | :--- | :--- |
 | `input/domains.txt` | Daftar minimal 5 domain target untuk *scanning*. |
-| `input/all-subdomains.txt` | File master yang mencatat semua subdomain unik yang ditemukan (untuk deduplikasi menggunakan `anew`). |
-| `output/live.txt` | Hasil akhir: daftar host hidup yang berhasil diakses. |
+| `input/all-subdomains.txt` | File master yang mencatat semua subdomain unik yang ditemukan (untuk deduplikasi menggunakan **`anew`**). |
+| `output/live.txt` | Hasil akhir: daftar host hidup yang berhasil diakses (Format: URL [STATUS] [TITLE]). |
 | `scripts/recon-auto.sh` | Script utama Bash yang menjalankan seluruh proses (Wajib *executable*). |
-| `logs/progress.log` | Log kemajuan skrip yang dilengkapi dengan *timestamp*. |
-| `logs/errors.log` | Log untuk mencatat semua *Standard Error* (stderr) dari *tools*. |
+| `logs/progress.log` | Log kemajuan skrip yang dilengkapi dengan *timestamp* (wajib). |
+| `logs/errors.log` | Log untuk mencatat semua *Standard Error* (stderr) dari *tools* (wajib). |
 
 ## Cara Setup Environment
 
-Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan menginstal *tools* yang digunakan oleh skrip ini:
+Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan menginstal *tools* yang digunakan oleh skrip ini (semua *tools* berbasis Go):
 
 1.  **Instalasi GoLang:**
     ```bash
@@ -37,24 +36,21 @@ Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan m
     echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc # atau ~/.bashrc
     source ~/.zshrc
     ```
-3.  **Instalasi Tools Project Discovery (`subfinder`, `httpx`):**
+3.  **Instalasi Tools (`subfinder`, `httpx`, `anew`):**
     ```bash
     go install -v [github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest](https://github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest)
     go install -v [github.com/projectdiscovery/httpx/cmd/httpx@latest](https://github.com/projectdiscovery/httpx/cmd/httpx@latest)
-    ```
-4.  **Instalasi Tool Deduplikasi (`anew`):**
-    ```bash
     go install -v [github.com/tomnomnom/anew@latest](https://github.com/tomnomnom/anew@latest)
     ```
 
-    ## Cara Menjalankan Script
+## Cara Menjalankan Script
 
 1.  **Kloning Repository:**
     ```bash
     git clone [https://github.com/Rayen142/recon-automation-Rayen.git](https://github.com/Rayen142/recon-automation-Rayen.git)
     cd recon-automation-Rayen
     ```
-2.  [cite_start]**Isi Input:** Pastikan file `input/domains.txt` berisi minimal 5 domain[cite: 45].
+2.  **Isi Input:** Pastikan file `input/domains.txt` berisi minimal 5 domain.
 3.  **Jalankan Skrip:**
     ```bash
     ./scripts/recon-auto.sh
@@ -62,14 +58,13 @@ Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan m
 
 ## Penjelasan Singkat Kode (`recon-auto.sh`)
 
-| Baris Kode | Tujuan Fungsional | Objektif Dipenuhi |
-| :--- | :--- | :--- |
-| `log() { ... | tee -a "$LOG_FILE" }` | [cite_start]Fungsi kustom untuk *logging* yang mencetak ke terminal dan menyimpan ke `progress.log` dengan *timestamp*[cite: 52]. | Logging & Timestamp |
-| `subfinder -d "$domain" ... 2>> "$ERROR_LOG"` | Mencari subdomain. [cite_start]`2>> "$ERROR_LOG"` mengalihkan *error* ke file log[cite: 53]. | Integrasi Tool 1, Error Handling |
-| `| anew "$SUBDOMAIN_FILE"` | [cite_start]Menerima *output* dari `subfinder` dan menghapus duplikasi *subdomain* sebelum mencatatnya ke `all-subdomains.txt`[cite: 50]. | Deduplikasi |
-| `| httpx -silent -status-code -title` | Menerima *host* yang baru, memvalidasi apakah host hidup, dan mengambil kode status serta judul. | Integrasi Tool 2 & 3 |
-| `| tee -a "$LIVE_FILE"` | [cite_start]Menyimpan *output* akhir host hidup ke `output/live.txt`[cite: 38]. | Output Terstruktur |
-| `wc -l < "$SUBDOMAIN_FILE"` | [cite_start]Menghitung jumlah total subdomain unik sebagai *summary*[cite: 54]. | Output Ringkasan |
+| Logika Inti | Keterangan Fungsional |
+| :--- | :--- |
+| **`log() { ... | tee -a "$LOG_FILE" }`** | Fungsi kustom untuk *logging* yang mencetak ke terminal dan menyimpan ke `progress.log` dengan *timestamp* (`date +'%Y-%m-%d %H:%M:%S'`). |
+| **`subfinder ... 2>> "$ERROR_LOG"`** | Mencari subdomain. Output *error* (stderr) dari *tool* ini dialihkan ke `logs/errors.log` (Error Handling). |
+| **`| anew "$SUBDOMAIN_FILE"`** | Menerima *output* dari `subfinder` dan menghapus duplikasi. Hanya subdomain baru yang diteruskan ke *pipeline* dan dicatat ke `all-subdomains.txt`. |
+| **`| httpx ... | tee -a "$LIVE_FILE"`** | Memvalidasi apakah subdomain hidup, mengambil kode status dan judul. Hasil akhir dicatat ke `output/live.txt` (Output Terstruktur). |
+| **`wc -l < "$SUBDOMAIN_FILE"`** | Menghitung jumlah total subdomain unik dan host hidup sebagai *summary* akhir. |
 
 ## Hasil Eksekusi dan Verifikasi
 <img width="1919" height="1008" alt="Screenshot 2025-11-16 190040" src="https://github.com/user-attachments/assets/f8ef436b-fcb4-4efb-a826-692d38f3c27f" />
