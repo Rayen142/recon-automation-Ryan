@@ -7,11 +7,12 @@
 
 Proyek ini adalah implementasi dari **Assignment Build Your Own Recon Automation Tool** yang bertujuan untuk mengotomatisasi alur kerja *subdomain enumeration* dan validasi host yang hidup (*live hosts*) menggunakan Bash Scripting.
 
-[cite_start]Script `recon-auto.sh` dirancang untuk berjalan *end-to-end* tanpa *error*, mengintegrasikan minimal 3 *tools* (`subfinder`, `anew`, dan `httpx`) [cite: 14] [cite_start]dalam satu *pipeline*, mengelola *input/output* file, melakukan *deduplikasi*, dan mencatat *logging* yang informatif[cite: 15]. Seluruh hasil pengerjaan diunggah ke *repository* GitHub publik ini.
+Script `recon-auto.sh` dirancang untuk berjalan *end-to-end* tanpa *error*, mengintegrasikan minimal 3 *tools* (`subfinder`, `anew`, dan `httpx`) [cite: 14] 
+dalam satu *pipeline*, mengelola *input/output* file, melakukan *deduplikasi*, dan mencatat *logging* yang informatif[cite: 15]. Seluruh hasil pengerjaan diunggah ke *repository* GitHub publik ini.
 
 ## Struktur Direktori
 
-[cite_start]Struktur folder ini wajib ada untuk memastikan skrip berjalan dengan benar[cite: 31].
+Struktur folder ini wajib ada untuk memastikan skrip berjalan dengan benar[cite: 31].
 recon-automation-Ryan/ ├── input/ │ ├── domains.txt │ └── all-subdomains.txt ├── output/ │ └── live.txt ├── scripts/ │ └── recon-auto.sh └── logs/ ├── progress.log └── errors.log
 | File/Folder | Deskripsi |
 | :--- | :--- |
