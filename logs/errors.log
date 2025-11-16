@@ -1,0 +1,17 @@
+Usage: httpx [OPTIONS] URL
+
+Error: No such option: -s
+[[34mINF[0m] Detected old /home/ryan/.config/subfinder/config.yaml config file, trying to migrate providers to /home/ryan/.config/subfinder/provider-config.yaml
+[[34mINF[0m] Migration successful from /home/ryan/.config/subfinder/config.yaml to /home/ryan/.config/subfinder/provider-config.yaml.
+Usage: httpx [OPTIONS] URL
+
+Error: No such option: -s
+Usage: httpx [OPTIONS] URL
+
+Error: No such option: -s
+Usage: httpx [OPTIONS] URL
+
+Error: No such option: -s
+Usage: httpx [OPTIONS] URL
+
+Error: No such option: -s
