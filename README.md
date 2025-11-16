@@ -13,15 +13,16 @@ dalam satu *pipeline*, mengelola *input/output* file, melakukan *deduplikasi*, d
 ## Struktur Direktori
 
 Struktur folder ini wajib ada untuk memastikan skrip berjalan dengan benar.
-recon-automation-Ryan/ ├── input/ │ ├── domains.txt │ └── all-subdomains.txt ├── output/ │ └── live.txt ├── scripts/ │ └── recon-auto.sh └── logs/ ├── progress.log └── errors.log
-| File/Folder | Deskripsi |
+recon-automation-Ryan/ 
+├── input/ │ ├── domains.txt │ └── all-subdomains.txt ├── output/ │ └── live.txt ├── scripts/ │ 
+└── recon-auto.sh └── logs/ ├── progress.log └── errors.log| File/Folder | Deskripsi |
 | :--- | :--- |
-| `input/domains.txt` | [cite_start]Daftar minimal 5 domain target untuk *scanning*[cite: 45]. |
-| `input/all-subdomains.txt` | [cite_start]File master yang mencatat semua subdomain unik yang ditemukan (untuk deduplikasi menggunakan `anew`)[cite: 35, 50]. |
-| `output/live.txt` | [cite_start]Hasil akhir: daftar host hidup yang berhasil diakses[cite: 38, 46]. |
-| `scripts/recon-auto.sh` | [cite_start]Script utama Bash yang menjalankan seluruh proses (Wajib *executable*)[cite: 40, 47]. |
-| `logs/progress.log` | [cite_start]Log kemajuan skrip yang dilengkapi dengan *timestamp*[cite: 42, 52]. |
-| `logs/errors.log` | [cite_start]Log untuk mencatat semua *Standard Error* (stderr) dari *tools*[cite: 43, 53]. |
+| `input/domains.txt` | Daftar minimal 5 domain target untuk *scanning*. |
+| `input/all-subdomains.txt` | File master yang mencatat semua subdomain unik yang ditemukan (untuk deduplikasi menggunakan `anew`). |
+| `output/live.txt` | Hasil akhir: daftar host hidup yang berhasil diakses. |
+| `scripts/recon-auto.sh` | Script utama Bash yang menjalankan seluruh proses (Wajib *executable*). |
+| `logs/progress.log` | Log kemajuan skrip yang dilengkapi dengan *timestamp*. |
+| `logs/errors.log` | Log untuk mencatat semua *Standard Error* (stderr) dari *tools*. |
 
 ## Cara Setup Environment
 
