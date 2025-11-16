@@ -1,8 +1,9 @@
 # 🛠️ Recon Automation Tool: Bash Scripting
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-hanif)
 
 **Nama Repository:** recon-automation-Ryan
 **Nama Script:** `recon-auto.sh`
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-hanif)
+
 
 ## Deskripsi Proyek
 
