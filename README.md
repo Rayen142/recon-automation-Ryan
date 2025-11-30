@@ -74,8 +74,7 @@ Berikut adalah langkah-langkah yang diperlukan untuk menyiapkan lingkungan dan m
 <img width="1919" height="1003" alt="Screenshot 2025-11-16 190410" src="https://github.com/user-attachments/assets/311e4add-15c1-41c5-b3d7-1537e7881685" />
 <img width="1919" height="1005" alt="Screenshot 2025-11-16 190423" src="https://github.com/user-attachments/assets/8a2e6453-54b3-4cf6-b899-e249f16531ef" />
 
-**PETUNJUK AKHIR:** Setelah `README.md` ini lengkap dan tersimpan, 
-lakukan `git add .`, `git commit -m "feat: Finalisasi dokumentasi dan hasil"` dan `git push origin main` untuk mengumpulkan tugas Anda.
+
 
 
 
